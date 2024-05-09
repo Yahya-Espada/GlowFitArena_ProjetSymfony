@@ -1,0 +1,39 @@
+
+
+{% block content %}
+    
+
+    <div id="results" class="row" id="eventsList">
+        {% for evenement in evenements %}
+        <div id= "results" class="col-md-4 mb-4">
+            <div class="card evenement-card">
+                <div class="card-body">
+                    <h5 class="card-title">ID: {{ evenement.id }}</h5>
+                    <p class="card-text">Titre: {{ evenement.titre }}</p>
+                    <p class="card-text">Description: {{ evenement.description }}</p>
+                    <p class="card-text">Date: {{ evenement.date }}</p>
+                    <p class="card-text">Gagnant: {{ evenement.winner }}</p>
+                    <p class="card-text">Categorie: {{ evenement.categorie }}</p>
+                    <td>
+                    {% if evenement.image %}
+                        <img src="{{ asset('images/' ~ evenement.image) }}" alt="Event Image" style="width: 100px; height: auto;">
+                    {% else %}
+                        No image available
+                    {% endif %}
+                </td>
+                    <a href="{{ path('app_evenement_show', {'id': evenement.id}) }}" class="btn btn-primary show-club">show</a>
+                    <a href="{{ path('app_evenement_edit', {'id': evenement.id}) }}" class="btn btn-warning edit-club">edit</a></div>
+
+            </div>
+        </div>
+    {% else %}
+        <div id="results" class="col-md-12">
+            <p>No records found</p>
+        </div>
+    {% endfor %}
+        
+    <div class="pagination">
+    {{ knp_pagination_render(evenements) }}
+</div>
+
+{% endblock %}

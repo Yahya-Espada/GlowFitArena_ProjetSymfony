@@ -1,0 +1,80 @@
+{% extends 'baseYah.html.twig' %}
+
+{% block title %}DietaryPrograms{% endblock %}
+
+{% block body %}
+    <div class="row justify-content-center">
+        <div class="col-xl-4 col-lg-12 col-sm-12">
+            <div class="card" >
+                <div class="card-header border-0 pb-0">
+                    <h2 class="card-title">Dietary Program</h2>
+                </div>
+                <div class="card-body pb-0" style="margin-bottom: 50px">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex px-0 justify-content-between">
+                            <strong>Id</strong>
+                            <span class="mb-0">{{ dietary_programs_copy.id }}</span>
+                        </li>
+                        <li class="list-group-item d-flex px-0 justify-content-between">
+                            <strong>Name</strong>
+                            <span class="mb-0">{{ dietary_programs_copy.name }}</span>
+                        </li>
+                        <li class="list-group-item d-flex px-0 justify-content-between">
+                            <strong>Description</strong>
+                            <span class="mb-0">{{ dietary_programs_copy.description }}</span>
+                        </li>
+                        <li class="list-group-item d-flex px-0 justify-content-between">
+                            <strong>StartDate</strong>
+                            <span class="mb-0">{{ dietary_programs_copy.startDate ? dietary_programs_copy.startDate|date('Y-m-d') : '' }}</span>
+                        </li>
+                        <li class="list-group-item d-flex px-0 justify-content-between">
+                            <strong>EndDate</strong>
+                            <span class="mb-0">{{ dietary_programs_copy.endDate ? dietary_programs_copy.endDate|date('Y-m-d') : '' }}</span>
+                        </li>
+                        <li class="list-group-item d-flex px-0 justify-content-between">
+                            <strong>CalorieGoal</strong>
+                            <span class="mb-0">{{ dietary_programs_copy.calorieGoal }}</span>
+                        </li>
+                        <li class="list-group-item d-flex px-0 justify-content-between">
+                            <strong>MacroRatioCarbs</strong>
+                            <span class="mb-0">{{ dietary_programs_copy.macroRatioCarbs }}</span>
+                        </li>
+                        <li class="list-group-item d-flex px-0 justify-content-between">
+                            <strong>MacroRatioProtein</strong>
+                            <span class="mb-0">{{ dietary_programs_copy.macroRatioProtein }}</span>
+                        </li>
+                        <li class="list-group-item d-flex px-0 justify-content-between">
+                            <strong>MacroRatioFat</strong>
+                            <span class="mb-0">{{ dietary_programs_copy.macroRatioFat }}</span>
+                        </li>
+                        <li class="list-group-item d-flex px-0 justify-content-between">
+                            <strong>MealTypes</strong>
+                            <span class="mb-0" style="margin-left: 20px">{{ dietary_programs_copy.mealTypes }}</span>
+                        </li>
+                        <li class="list-group-item d-flex px-0 justify-content-between">
+                            <strong>Notes</strong>
+                            <span class="mb-0" style="margin-left: 20px">{{ dietary_programs_copy.notes }}</span>
+                        </li>
+                        <li class="list-group-item d-flex px-0 justify-content-between">
+                            <strong>CreatedAt</strong>
+                            <span class="mb-0">{{ dietary_programs_copy.createdAt ? dietary_programs_copy.createdAt|date('Y-m-d H:i:s') : '' }}</span>
+                        </li>
+                        <li class="list-group-item d-flex px-0 justify-content-between">
+                            <strong>UpdatedAt</strong>
+                            <span class="mb-0">{{ dietary_programs_copy.updatedAt ? dietary_programs_copy.updatedAt|date('Y-m-d H:i:s') : '' }}</span>
+                        </li>
+                    </ul>
+
+                    <a href="{{ path('app_dietary_programs_copy_index') }}" class="btn btn-primary btn-xxs shadow">back to list</a>
+                    <a href="{{ path('app_dietary_programs_copy_edit', {'id': dietary_programs_copy.id}) }}" class="btn btn-primary btn-xxs shadow">Edit</a>
+                    <a href="{{ path('app_dietary_programs_copy_export', {'id': dietary_programs_copy.id}) }}" class="btn btn-primary btn-xxs shadow">Export as PDF</a>
+
+                    {{ include('dietary_programs_copy/_delete_form.html.twig') }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+ 

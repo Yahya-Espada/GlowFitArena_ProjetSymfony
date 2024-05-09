@@ -1,0 +1,12 @@
+{% extends '/admin2/base.html.twig' %}
+
+
+{% block body %}
+
+	<div class="content-body">
+
+		{{ include('planning/_form.html.twig') }}
+
+		<a href="{{ path('app_planning_index') }}">back to list</a>
+	</div>
+{% endblock %}

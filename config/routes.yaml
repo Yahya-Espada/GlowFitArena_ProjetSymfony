@@ -1,0 +1,76 @@
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+app_produit_index:
+    path: /produit
+    controller: App\Controller\ProduitController::index
+    methods: [GET]
+
+app_produit_index1:
+    path: /produit/afficherfront
+    controller: App\Controller\ProduitController::front
+    methods: [GET]
+    
+app_produit_new:
+    path: /produit/new
+    controller: App\Controller\ProduitController::new
+    methods: [GET, POST]
+
+app_produit_show:
+    path: /produit/{idProduit}
+    controller: App\Controller\ProduitController::show
+    methods: [GET]
+
+app_produit_edit:
+    path: /produit/{idProduit}/edit
+    controller: App\Controller\ProduitController::edit
+    methods: [GET, POST]
+
+app_produit_delete:
+    path: /produit/{idProduit}
+    controller: App\Controller\ProduitController::delete
+    methods: [POST]
+
+app_categorie_index:
+    path: /categorie
+    controller: 'App\Controller\CategorieController::index'
+    methods: ['GET']
+
+app_categorie_new:
+    path: /categorie/new
+    controller: 'App\Controller\CategorieController::new'
+    methods: ['GET', 'POST']
+
+app_categorie_show:
+    path: /categorie/{idCategorie}
+    controller: 'App\Controller\CategorieController::show'
+    methods: ['GET']
+
+app_categorie_edit:
+    path: /categorie/{idCategorie}/edit
+    controller: 'App\Controller\CategorieController::edit'
+    methods: ['GET', 'POST']
+
+app_categorie_delete:
+    path: /categorie/{idCategorie}
+    controller: 'App\Controller\CategorieController::delete'
+    methods: ['POST']
+
+app_produit_index_sorted:
+    path: /sorted
+    controller: App\Controller\ProduitController::indexSorted
+    methods: ['GET']
+
+produit_download_pdf:
+    path: /produit/downloadpdf
+    controller: App\Controller\ProduitController::d
+    methods: ['GET']
+
+app_produit_stats:
+    path: /stats
+    controller: App\Controller\ProduitController::stats
+    methods: ['GET']
+
+app_map_page:
+    path: /map
+    controller: App\Controller\MapController::index

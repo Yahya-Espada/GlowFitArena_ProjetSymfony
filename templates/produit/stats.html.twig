@@ -1,0 +1,50 @@
+{# stats.html.twig #}
+
+{% extends '/admin1/base.html.twig' %}
+
+{% block title %}Product Statistics{% endblock %}
+
+{% block body %}
+<div class="align-items-center justify-content-start" style="margin-top: 100px">
+    <h1>Product Statistics</h1>
+    <canvas id="productChart" width="800" height="400"></canvas>
+</div>
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var ctx = document.getElementById('productChart').getContext('2d');
+            var chart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: [
+                        {% for stat in stats %}
+                            '{{ stat.libelle }}',
+                        {% endfor %}
+                    ],
+                    datasets: [{
+                        label: 'Quantity',
+                        data: [
+                            {% for stat in stats %}
+                                {{ stat.quantite }},
+                            {% endfor %}
+                        ],
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+{% endblock %}
+{% endblock %} {# <-- The corrected closing tag #}

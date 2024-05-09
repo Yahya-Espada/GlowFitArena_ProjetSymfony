@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Statistiques des Repas{% endblock %}
+
+{% block body %}
+    <h1>Statistiques des Repas</h1>
+    <div style="width: 80%; margin: auto;">
+        <canvas id="repasChart"></canvas>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <script>
+        // Récupérer les données de statistiques depuis le contrôleur
+        const stats = {{ stats|json_encode|raw }};
+
+        // Extraire les états et les nombres correspondants à partir des données de statistiques
+        const labels = Object.keys(stats);
+        const data = Object.values(stats);
+
+        // Créer un graphique circulaire (pie chart) avec Chart.js
+        const ctx = document.getElementById('repasChart').getContext('2d');
+        const repasChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Nombre de repas par état',
+                    data: data,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.6)', // Rouge
+                        'rgba(54, 162, 235, 0.6)', // Bleu
+                        // Ajoutez d'autres couleurs si nécessaire
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        // Couleurs de bordure correspondantes
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'baseFront.html.twig' %}
+
+{% block title %}Edit Equipement {% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        /* Custom CSS Styles */
+        /* Add any custom styles specific to this page */
+    </style>
+{% endblock %}
+
+{% block content %}
+    <h1>Edit Equipement</h1>
+
+    {{ include('equipement/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_equipement_index') }}">back to list</a>
+
+    {{ include('equipement/_delete_form.html.twig') }}
+{% endblock %}
+

@@ -1,0 +1,86 @@
+
+{% block title %}Reservation{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        /* Custom CSS Styles */
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container-fluid {
+            padding-left: 250px; /* Adjust the value based on the width of your sidebar */
+        }
+
+        h1 {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        th {
+            font-weight: bold;
+            color: #666;
+        }
+
+        td {
+            font-size: 16px;
+            color: #444;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            margin-right: 8px;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <h1 class="mt-5 mb-4">Reservation index</h1>
+
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Etat</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for reservation in reservations %}
+                    <tr>
+                        <td>{{ reservation.id }}</td>
+                        <td>{{ reservation.etat ? 'Yes' : 'No' }}</td>
+                        <td>
+                            <a href="{{ path('app_reservation_show', {'id': reservation.id}) }}" class="btn btn-info btn-sm">Show</a>
+                            <a href="{{ path('app_reservation_edit', {'id': reservation.id}) }}" class="btn btn-primary btn-sm">Edit</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="3">No records found</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <a href="{{ path('app_reservation_new') }}" class="btn btn-success">Create new</a>
+
+    </div>
+
+         <a href="{{ path('app_reservation_stats') }}" class="btn btn-primary">stat</a>
+
+{% endblock %}

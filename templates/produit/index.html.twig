@@ -1,0 +1,78 @@
+{% extends '/admin1/base.html.twig' %}
+
+{% block title %}Produit index{% endblock %}
+
+{% block body %}
+<div class="align-items-center justify-content-start" style="margin-top: 100px">
+    <h1>Produit index</h1>
+    <form action="{{ path('app_produit_index') }}" method="get" class="mb-3">
+        <div class="input-group">
+            <input type="text" class="form-control form-control-sm" placeholder="Search..." name="search" value="{{ searchQuery ?? '' }}">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="submit">Search</button>
+            </div>
+        </div>
+    </form>
+    
+    {# Sorting options #}
+    <div class="mb-3">
+        <span>Sort by:</span>
+        <select id="sortBy" name="sort">
+            <option value="id" {% if sortBy == 'id' %}selected{% endif %}>Id</option>
+            <option value="libelle" {% if sortBy == 'libelle' %}selected{% endif %}>Libelle</option>
+            <option value="quantite" {% if sortBy == 'quantite' %}selected{% endif %}>Quantite</option>
+            <option value="prix" {% if sortBy == 'prix' %}selected{% endif %}>Prix</option>
+        </select>
+        <select id="sortOrder" name="order">
+            <option value="ASC" {% if sortOrder == 'ASC' %}selected{% endif %}>Ascending</option>
+            <option value="DESC" {% if sortOrder == 'DESC' %}selected{% endif %}>Descending</option>
+        </select>
+        <button class="btn btn-outline-secondary" onclick="applySorting()">Sort</button>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdProduit</th>
+                <th>Libelle</th>
+                <th>Quantite</th>
+                <th>Prix</th>
+                <th>PhotoProduit</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for produit in produits %}
+            <tr>
+                <td>{{ produit.idProduit }}</td>
+                <td>{{ produit.libelle }}</td>
+                <td>{{ produit.quantite }}</td>
+                <td>{{ produit.prix }}</td>
+                <td>{{ produit.photoProduit }}</td>
+                <td>
+                    <a href="{{ path('app_produit_show', {'idProduit': produit.idProduit}) }}" class="btn btn-success">Show</a>
+                    <a href="{{ path('app_produit_edit', {'idProduit': produit.idProduit}) }}" class="btn btn-primary">Edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">No records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ path('app_produit_new') }}" class="btn btn-primary">Create New</a>
+    <a href="{{ path('pdf') }}" class="btn btn-primary">Export PDF</a>
+    <a href="{{ path('app_produit_stats') }}" class="btn btn-primary">stat</a>
+
+</div>
+
+<script>
+    function applySorting() {
+        var sortBy = document.getElementById('sortBy').value;
+        var sortOrder = document.getElementById('sortOrder').value;
+        window.location.href = "{{ path('app_produit_index_sorted') }}?sort=" + sortBy + "&order=" + sortOrder;
+    }
+</script>
+
+{% endblock %}

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        .header h1 {
+            font-size: 24px;
+            color: #333;
+        }
+        .content {
+            margin: 0 auto;
+            width: 80%;
+        }
+        .content p {
+            font-size: 16px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+<div class="content">
+    <div class="card" >
+        <div class="card-header border-0 pb-0" style=" text-align: center;
+            margin-bottom: 50px;">
+            <h2 class="card-title">Dietary Program</h2>
+        </div>
+        <div class="card-body pb-0" style="margin-bottom: 50px">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item d-flex px-0 justify-content-between">
+                    <strong>Id</strong>
+                    <span class="mb-0">{{ dietary_programs_copy.id }}</span>
+                </li>
+                <li class="list-group-item d-flex px-0 justify-content-between">
+                    <strong>Name</strong>
+                    <span class="mb-0">{{ dietary_programs_copy.name }}</span>
+                </li>
+                <li class="list-group-item d-flex px-0 justify-content-between">
+                    <strong>Description</strong>
+                    <span class="mb-0">{{ dietary_programs_copy.description }}</span>
+                </li>
+                <li class="list-group-item d-flex px-0 justify-content-between">
+                    <strong>StartDate</strong>
+                    <span class="mb-0">{{ dietary_programs_copy.startDate ? dietary_programs_copy.startDate|date('Y-m-d') : '' }}</span>
+                </li>
+                <li class="list-group-item d-flex px-0 justify-content-between">
+                    <strong>EndDate</strong>
+                    <span class="mb-0">{{ dietary_programs_copy.endDate ? dietary_programs_copy.endDate|date('Y-m-d') : '' }}</span>
+                </li>
+                <li class="list-group-item d-flex px-0 justify-content-between">
+                    <strong>CalorieGoal</strong>
+                    <span class="mb-0">{{ dietary_programs_copy.calorieGoal }}</span>
+                </li>
+                <li class="list-group-item d-flex px-0 justify-content-between">
+                    <strong>MacroRatioCarbs</strong>
+                    <span class="mb-0">{{ dietary_programs_copy.macroRatioCarbs }}</span>
+                </li>
+                <li class="list-group-item d-flex px-0 justify-content-between">
+                    <strong>MacroRatioProtein</strong>
+                    <span class="mb-0">{{ dietary_programs_copy.macroRatioProtein }}</span>
+                </li>
+                <li class="list-group-item d-flex px-0 justify-content-between">
+                    <strong>MacroRatioFat</strong>
+                    <span class="mb-0">{{ dietary_programs_copy.macroRatioFat }}</span>
+                </li>
+                <li class="list-group-item d-flex px-0 justify-content-between">
+                    <strong>MealTypes</strong>
+                    <span class="mb-0" style="margin-left: 20px">{{ dietary_programs_copy.mealTypes }}</span>
+                </li>
+                <li class="list-group-item d-flex px-0 justify-content-between">
+                    <strong>Notes</strong>
+                    <span class="mb-0" style="margin-left: 20px">{{ dietary_programs_copy.notes }}</span>
+                </li>
+                <li class="list-group-item d-flex px-0 justify-content-between">
+                    <strong>CreatedAt</strong>
+                    <span class="mb-0">{{ dietary_programs_copy.createdAt ? dietary_programs_copy.createdAt|date('Y-m-d H:i:s') : '' }}</span>
+                </li>
+                <li class="list-group-item d-flex px-0 justify-content-between">
+                    <strong>UpdatedAt</strong>
+                    <span class="mb-0">{{ dietary_programs_copy.updatedAt ? dietary_programs_copy.updatedAt|date('Y-m-d H:i:s') : '' }}</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+</html>

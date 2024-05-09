@@ -1,0 +1,50 @@
+{% extends '/admin2/base.html.twig' %}
+{% block body %}
+	<div class="content-body">
+		<div class="text-right mb-2">
+			<a href="{{ path('pdf1') }}" class="btn btn-primary">Download Seance List PDF</a>
+		</div>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Heuredebut</th>
+					<th>Heurefin</th>
+					<th>Date</th>
+					<th>Prix</th>
+					<th>Typeseance</th>
+					<th>actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for seance in seances %}
+					<tr>
+						<td>{{ seance.id }}</td>
+						<td>{{ seance.heuredebut }}</td>
+						<td>{{ seance.heurefin }}</td>
+						<td>{{ seance.date }}</td>
+						<td>{{ seance.prix }}</td>
+						<td>{{ seance.typeseance }}</td>
+						<td>
+							<a href="{{ path('app_seance_show', {'id': seance.id}) }}">show</a>
+							<a href="{{ path('app_seance_edit', {'id': seance.id}) }}">edit</a>
+						</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="7">no records found</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		<div class="container mt-4">
+			<div class="d-flex justify-content-center">
+				<div class="pagination">
+					{{ knp_pagination_render(pagination) }}
+				</div>
+			</div>
+		</div>
+
+		<a href="{{ path('app_seance_new') }}">Create new</a>
+	</div>
+{% endblock %}

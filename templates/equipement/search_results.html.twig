@@ -1,0 +1,36 @@
+{# templates/equipement/search_results.html.twig #}
+
+
+{% block title %}Résultats de la recherche{% endblock %}
+
+{% block body %}
+    <h1>Résultats de la recherche</h1>
+
+    {% if results is not empty %}
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>rate/th>
+                    <th>date_equip</th>
+                    <th>Type_equip</th>
+                    <th>ID Reclamation</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for reservation in results %}
+                    <tr>
+               <td>{{ reservation.id }}</td>
+                        <td>{{ reservation.dateReservation ? reservation.dateReservation|date('Y-m-d') : '' }}</td>
+                        <td>{{ reservation.heureReservation }}</td>
+                        <td>{{ reservation.prix }}</td>
+                        <td>{{ reservation.utilisateur.idUtil }}</td>
+                        <td>{{ reservation.moyenTransport.idTransport }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Aucun résultat trouvé.</p>
+    {% endif %}
+{% endblock %}

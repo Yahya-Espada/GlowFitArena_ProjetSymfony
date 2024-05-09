@@ -1,0 +1,26 @@
+{% extends 'base1.html.twig' %}
+
+{% block title %}New Produit{% endblock %}
+
+{% block body %}
+    {% include '/admin/includes/header.html.twig' %}
+
+    <div class="container" style="margin-top: 100px;">
+        <h1>Create new Produit</h1>
+        <div class="row align-items-center justify-content-start">
+            <div class="col-md-6" style="margin-left: 300px;">
+                {{ form_start(form) }}
+                    {{ form_row(form.libelle) }}
+                    {{ form_row(form.quantite) }}
+                    {{ form_row(form.prix) }}
+                    {{ form_row(form.imageFile) }} {# Add image upload field #}
+                    {{ form_row(form.photoProduit) }} {# Add hidden field for storing the current image path #}
+
+                    <button type="submit"  class="btn btn-success">show></button>
+                {{ form_end(form) }}
+
+                <a href="{{ path('app_produit_index') }}" class="btn btn-secondary">Back to list</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

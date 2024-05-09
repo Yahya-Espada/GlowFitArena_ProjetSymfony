@@ -1,0 +1,11 @@
+<form method="post" action="{{ path('app_produit_new') }}">
+    {{ form_start(form) }}
+    {{ form_row(form.libelle) }}
+    {{ form_row(form.quantite) }}
+    {{ form_row(form.prix) }}
+    {{ form_row(form.photoProduit) }}
+    {{ form_row(form.idCategorie) }}
+
+    <button type="submit" class="btn btn-success">confirm</button>
+    {{ form_end(form) }}
+</form>

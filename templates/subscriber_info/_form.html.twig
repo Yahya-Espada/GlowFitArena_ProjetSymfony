@@ -1,0 +1,24 @@
+<style>
+    .form-error-message {
+        color: red;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+</style>
+
+{{ form_start(form) }}
+    {# This line will render any global errors #}
+<div class="form-error-message">{{ form_errors(form) }}</div>
+{% for field in form %}
+    {% if field.vars.name != '_token' %}
+        <div class="form-group">
+            {{ form_label(field) }}
+            <span class="form-error-message">{{ form_errors(field) }}</span>
+            {{ form_widget(field) }}
+        </div>
+    {% endif %}
+{% endfor %}
+<button class="btn btn-outline-info">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

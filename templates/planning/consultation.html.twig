@@ -1,0 +1,27 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}Consultation du Planning
+{% endblock %}
+
+{% block body %}
+	<h1>Consultation du Planning</h1>
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th scope="col">ID</th>
+				<th scope="col">Titre</th>
+				<th scope="col">Nombre de séances</th>
+				<th scope="col">Prix</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>{{ planning.idplanning }}</td>
+				<td>{{ planning.titre }}</td>
+				<td>{{ planning.nbseance }}</td>
+				<td>{{ planning.prix }}</td>
+			</tr>
+		</tbody>
+	</table>
+{% endblock %}

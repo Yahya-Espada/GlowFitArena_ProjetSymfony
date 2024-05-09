@@ -1,0 +1,97 @@
+{% extends 'baseYah.html.twig' %}
+
+{% block title %}SubscriberInfo{% endblock %}
+
+{% block body %}
+    <div class="row justify-content-center">
+        <div class="col-xl-4 col-lg-12 col-sm-12">
+            <div class="card" >
+                <div class="card-header border-0 pb-0">
+                    <h2 class="card-title">Subscriber Info</h2>
+                </div>
+                <div class="card-body pb-0" style="margin-bottom: 50px">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex px-0 justify-content-between">
+                            <strong>Id</strong>
+                            <span class="mb-0">{{ subscriber_info.id }}</span>
+                        </li>
+                        <li class="list-group-item d-flex px-0 justify-content-between">
+                            <strong>Height</strong>
+                            <span id="height" class="mb-0">{{ subscriber_info.height }}</span>
+                            <button id="toggleHeight" class="btn btn-primary">Convert to American</button>
+                        </li>
+                        <li class="list-group-item d-flex px-0 justify-content-between">
+                            <strong>Weight</strong>
+                            <span class="mb-0">{{ subscriber_info.weight }}</span>
+                        </li>
+                        <li class="list-group-item d-flex px-0 justify-content-between">
+                            <strong>Age</strong>
+                            <span class="mb-0">{{ subscriber_info.age }}</span>
+                        </li>
+                        <li class="list-group-item d-flex px-0 justify-content-between">
+                            <strong>Gender</strong>
+                            <span class="mb-0">{{ subscriber_info.gender }}</span>
+                        </li>
+                        <li class="list-group-item d-flex px-0 justify-content-between">
+                            <strong>Goals</strong>
+                            <span class="mb-0">{{ subscriber_info.goals }}</span>
+                        </li>
+                        <li class="list-group-item d-flex px-0 justify-content-between">
+                            <strong>ActivityLevel</strong>
+                            <span class="mb-0">{{ subscriber_info.activityLevel }}</span>
+                        </li>
+                        <li class="list-group-item d-flex px-0 justify-content-between">
+                            <strong>DietaryRestrictions</strong>
+                            <span class="mb-0">{{ subscriber_info.dietaryRestrictions }}</span>
+                        </li>
+                        <li class="list-group-item d-flex px-0 justify-content-between">
+                            <strong>FoodPreferences</strong>
+                            <span class="mb-0">{{ subscriber_info.foodPreferences }}</span>
+                        </li>
+                        <li class="list-group-item d-flex px-0 justify-content-between">
+                            <strong>CreatedAt</strong>
+                            <span class="mb-0">{{ subscriber_info.createdAt ? subscriber_info.createdAt|date('Y-m-d H:i:s') : '' }}</span>
+                        </li>
+                        <li class="list-group-item d-flex px-0 justify-content-between">
+                            <strong>UpdatedAt</strong>
+                            <span class="mb-0">{{ subscriber_info.updatedAt ? subscriber_info.updatedAt|date('Y-m-d H:i:s') : '' }}</span>
+                        </li>
+                    </ul>
+
+                    <a href="{{ path('app_subscriber_info_index') }}" class="btn btn-primary btn-xxs shadow">back to list</a>
+                    <a href="{{ path('app_subscriber_info_edit', {'id': subscriber_info.id}) }}" class="btn btn-primary btn-xxs shadow">Edit</a>
+
+                    {{ include('subscriber_info/_delete_form.html.twig') }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% block javascripts %}
+        <script>
+            document.getElementById('toggleHeight').addEventListener('click', function() {
+                var heightElement = document.getElementById('height');
+                var height = heightElement.textContent.trim();
+                var button = document.getElementById('toggleHeight');
+
+                var inches, feet;
+
+                if (button.textContent === 'Convert to American') {
+                    height = parseFloat(height);
+                    inches = height / 2.54;
+                    feet = Math.floor(inches / 12);
+                    inches = inches % 12;
+                    heightElement.textContent = feet + "' " + inches.toFixed(2) + '"';
+                    button.textContent = 'Convert to European';
+                } else {
+                    height = height.split("' ");
+                    feet = parseFloat(height[0]);
+                    inches = parseFloat(height[1].replace('"', ''));
+                    var cm = (feet * 12 + inches) * 2.54;
+                    heightElement.textContent = Math.round(cm);
+                    button.textContent = 'Convert to American';
+                }
+            });
+        </script>
+    {% endblock %}
+{% endblock %}

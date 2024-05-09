@@ -1,0 +1,36 @@
+{% extends 'baseFront.html.twig' %}
+
+{% block title %}Profil de {{ user.username }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1>Profil de {{ user.username }}</h1>
+         <div class="profile-image"> 
+     {% if user.image %}
+             <img src="{{ asset('uploads/' ~ user.image) }}" alt="Profil image" class="img-fluid rounded-circle mx-auto my-3"  style="width:300px; height:300px">
+        {% else %}
+          <div class="no-image-placeholder">No image available</div>
+ {% endif %} 
+                                    </div>
+                                    </div>
+
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>Username</th>
+                    <td>{{ user.username }}</td>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <td>{{ user.email }}</td>
+                </tr>
+                <tr>
+                    <th>Numero de téléphone</th>
+                    <td>{{ user.numeroDeTelephone }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <a href="{{ path('app_user_edit_profil') }}" class="btn btn-primary">Editer mon profil</a>
+    </div>
+{% endblock %}

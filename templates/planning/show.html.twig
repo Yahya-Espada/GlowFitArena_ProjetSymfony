@@ -1,0 +1,32 @@
+{% extends '/admin2/base.html.twig' %}
+
+{% block body %}
+	<div class="content-body">
+		<table class="table">
+			<tbody>
+				<tr>
+					<th>Idplanning</th>
+					<td>{{ planning.idplanning }}</td>
+				</tr>
+				<tr>
+					<th>Titre</th>
+					<td>{{ planning.titre }}</td>
+				</tr>
+				<tr>
+					<th>Nbseance</th>
+					<td>{{ planning.nbseance }}</td>
+				</tr>
+				<tr>
+					<th>Prix</th>
+					<td>{{ planning.prix }}</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<a href="{{ path('app_planning_index') }}">back to list</a>
+
+		<a href="{{ path('app_planning_edit', {'idplanning': planning.idplanning}) }}">edit</a>
+
+		{{ include('planning/_delete_form.html.twig') }}
+	</div>
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends 'baseFront.html.twig' %}
+
+{% block title %}Equipement{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        /* Custom CSS Styles */
+        /* Add any custom styles specific to this page */
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <h1>Equipement</h1>
+
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ equipement.id }}</td>
+                </tr>
+                <tr>
+                    <th>Rate</th>
+                    <td>{{ equipement.rate }}</td>
+                </tr>
+                <tr>
+                    <th>Date_equip</th>
+                    <td>{{ equipement.dateEquip }}</td>
+                </tr>
+                <tr>
+                    <th>Type_equip</th>
+                    <td>{{ equipement.TypeEquip }}</td>
+                </tr>
+                <tr>
+                    <th>Reclamation</th>
+                    <td>{{ equipement.Reclamation }}</td>
+                </tr>
+                 <tr>
+                    <th>QR Code</th>
+                    <td>{{ qrCodeResult.getString() | raw }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <a href="{{ path('app_equipement_index') }}" class="btn btn-secondary">Back to List</a>
+        <a href="{{ path('app_equipement_edit', {'id': equipement.id}) }}" class="btn btn-info">Edit</a>
+
+        {{ include('equipement/_delete_form.html.twig') }}
+    </div>
+{% endblock %}

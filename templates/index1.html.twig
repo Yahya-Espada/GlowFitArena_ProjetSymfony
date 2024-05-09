@@ -1,0 +1,43 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Produit index{% endblock %}
+
+{% block body %}
+    <!-- Dashboard content -->
+    <div class="container-fluid">
+        <h1>Produit index</h1>
+        <div class="row align-items-center justify-content-start">
+            {% if produits is not empty %}
+                {% for produit in produits %}
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <img src="{{ asset('uploads/' ~ produit.photoProduit) }}" class="card-img-top" alt="Product Image" style="width: 200px; height: auto;">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ produit.libelle }}</h5>
+                                <p class="card-text">Quantité: {{ produit.quantite }}</p>
+                                <p class="card-text">Prix: {{ produit.prix }}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No records found</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Search form -->
+    <div class="container-fluid mt-3">
+        <form action="{{ path('app_produit_index1') }}" method="get" class="mb-3">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search..." name="search" value="{{ app.request.query.get('search') }}">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Button to navigate to the Map Page -->
+    <div class="container-fluid mt-3">
+        <a href="{{ path('map_page') }}" class="btn btn-primary">Map</a>
+    </div>
+{% endblock %}

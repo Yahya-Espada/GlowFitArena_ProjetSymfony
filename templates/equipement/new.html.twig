@@ -1,0 +1,40 @@
+
+
+
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	<style>
+		/* Styles pour le contenu principal */
+		.content-body {
+			padding: 20px;
+			background-color: #f8f9fa; /* Couleur de fond */
+			border: 1px solid #ced4da; /* Bordure */
+			border-radius: 5px; /* Coins arrondis */
+		}
+
+		/* Styles pour le conteneur fluide */
+		.container-fluid {
+			max-width: 1200px;
+			margin: 0 auto;
+		}
+
+		/* Styles pour le paragraphe */
+		p {
+			color: #333; /* Couleur du texte */
+			font-size: 16px; /* Taille de la police */
+		}
+	</style>
+{% endblock %}
+
+{% block body %}
+
+	<div class="content-body">
+		<div class="container-fluid">
+			{{ include('equipement/_form.html.twig') }}
+		</div>
+		<div class="g-recaptcha" data-sitekey="6LclU8kpAAAAADH4B5IpnT3YboEcmRPdOHP7AGLx"></div>
+	</div>
+
+{% endblock %}

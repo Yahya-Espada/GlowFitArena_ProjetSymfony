@@ -1,0 +1,48 @@
+
+{{ form_start(form) }}
+<div>
+<input name="resetType" type="radio" checked id="emailRadio" value="Email"/> Email 
+
+<input name="resetType" type="radio" id="phoneNumberRadio" value="PhoneNumber"/> Phone Number
+</div>
+<div id="email-input"  class="my-3" style="">
+{{form_label(form.email)}}
+{{ form_widget(form.email) }}
+</div>
+<div id="phone-input" style="display:none">
+{{form_label(form.phoneNumber)}}
+
+{{ form_widget(form.phoneNumber) }}
+
+</div>
+    <button class="btn mt-5 btn-primary">{{ button_label|default('Envoyer') }}</button>
+
+{{ form_end(form) }}
+
+<script>
+ document.addEventListener("DOMContentLoaded", function() {
+        // Get the radio buttons
+        const emailRadio = document.getElementById("emailRadio");
+        const phoneNumberRadio = document.getElementById("phoneNumberRadio");
+        
+        // Add change event listener to the radio buttons
+        emailRadio.addEventListener("change", function() {
+            if (this.checked) {
+                document.getElementById("email-input").style.display="block"
+                
+                document.getElementById("phone-input").style.display="none"
+                // Email radio button is checked
+                // Add your JavaScript logic here
+            }
+        });
+
+        phoneNumberRadio.addEventListener("change", function() {
+            if (this.checked) {
+                // Phone Number radio button is checked
+ document.getElementById("email-input").style.display="none"
+                
+                document.getElementById("phone-input").style.display="block"                // Add your JavaScript logic here
+            }
+        });
+    });
+</script>

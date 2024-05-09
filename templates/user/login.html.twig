@@ -1,0 +1,20 @@
+
+{% extends 'baseFront.html.twig' %}
+
+{% block title %}Login {% endblock %}
+
+{% block content %}
+
+
+<div class="example-wrapper">
+     {{ include('user/_form.html.twig') }}
+     {% if error is defined %}
+     <div class="alert alert-danger my-5">
+     {{error}}
+     
+     </div>
+     {% endif %}
+</div>
+     <a class="mt-3" href="{{path("app_user_request_resetPassword")}}">Mot de passe Oublié </a>
+
+{% endblock %}

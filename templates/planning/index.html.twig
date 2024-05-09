@@ -1,0 +1,128 @@
+{% extends '/admin2/base.html.twig' %}
+
+{% block body %}
+	<div
+		class="content-body">
+
+		<!-- Search Bar -->
+		<div class="search-container">
+			<input type="text" id="searchInput" class="search-input" placeholder="Search..." onkeyup="searchTable()">
+		</div>
+
+		<table class="table" id="planningsTable">
+			<thead>
+				<tr>
+					<th>Idplanning</th>
+					<th>Titre</th>
+					<th>
+						Nbseance
+						<a href="{{ path('tri', {'sortBy': 'nbseance'}) }}">tri</a>
+					</th>
+					<th>Prix</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for planning in plannings %}
+					<tr>
+						<td>{{ planning.idplanning }}</td>
+						<td>{{ planning.titre }}</td>
+						<td>{{ planning.nbseance }}</td>
+						<td>{{ planning.prix }}</td>
+						<td>
+							{# <a href="{{ path('app_planning_show', {'userId': userId}) }}">show</a> #}
+							<a href="{{ path('app_planning_edit', {'idplanning': planning.idplanning}) }}">edit</a>
+						</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="5">No records found</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+
+		<a href="{{ path('app_planning_new') }}" class="btn btn-primary">Create new</a>
+	</div>
+
+	<style>
+		.search-container {
+			margin-bottom: 20px;
+		}
+
+		.search-input {
+			padding: 8px;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			width: 200px;
+		}
+
+		.table {
+			width: 100%;
+			border-collapse: collapse;
+		}
+
+		.table th,
+		.table td {
+			padding: 8px;
+			border: 1px solid #ddd;
+			text-align: left;
+		}
+
+		.table th {
+			background-color: #f2f2f2;
+		}
+
+		.table tr:nth-child(even) {
+			background-color: #f2f2f2;
+		}
+
+		.table tr:hover {
+			background-color: #ddd;
+		}
+
+		.btn {
+			display: inline-block;
+			padding: 8px 16px;
+			text-decoration: none;
+			background-color: #007bff;
+			color: #fff;
+			border: none;
+			border-radius: 4px;
+			cursor: pointer;
+		}
+
+		.btn:hover {
+			background-color: #0056b3;
+		}
+	</style>
+
+	<script>
+		function searchTable() { // Declare variables
+var input,
+filter,
+table,
+tr,
+td,
+i,
+txtValue;
+input = document.getElementById("searchInput");
+filter = input.value.toUpperCase();
+table = document.getElementById("planningsTable");
+tr = table.getElementsByTagName("tr");
+
+// Loop through all table rows, and hide those that don't match the search query
+for (i = 0; i < tr.length; i++) {
+td = tr[i].getElementsByTagName("td")[1]; // Change index to match the column you want to search (e.g., 1 for "Titre")
+if (td) {
+txtValue = td.textContent || td.innerText;
+if (txtValue.toUpperCase().indexOf(filter) > -1) {
+tr[i].style.display = "";
+} else {
+tr[i].style.display = "none";
+}
+}
+}
+}
+	</script>
+{% endblock %}

@@ -1,0 +1,88 @@
+{% extends 'baseFront.html.twig' %}
+
+{% block title %}Equipement index{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="content">
+                    <h1 class="mt-5 mb-4 text-center">Equipement index</h1>
+                    <div class="input-group mb-3">
+                        <input id="search-input" class="form-control mr-2 search-input" type="text" placeholder="Search Category...">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button">Search</button>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center mb-4">
+                        <a href="{{ path('triespc') }}" class="btn btn-danger mr-2"><i class="feather-arrow-down"></i> Statut Ascendant</a>
+                        <a href="{{ path('triespcDESC') }}" class="btn btn-danger"><i class="feather-arrow-down"></i> Statut Desendent</a>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Id</th>
+                                    <th scope="col">Rate</th>
+                                    <th scope="col">Date Equip</th>
+                                    <th scope="col">Type Equip</th>
+                                    <th scope="col">Reclamation</th>
+                                    <th scope="col">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tableBodyPlaceholder">
+                                {% for equipement in equipements %}
+                                    <tr>
+                                        <td>{{ equipement.id }}</td>
+                                        <td>{{ equipement.rate }}</td>
+                                        <td>{{ equipement.dateEquip }}</td>
+                                        <td>{{ equipement.TypeEquip }}</td>
+                                        <td>{{ equipement.Reclamation }}</td>
+                                        <td>
+                                            <a href="{{ path('app_equipement_show', {'id': equipement.id}) }}" class="btn btn-info btn-sm">Show</a>
+                                            <a href="{{ path('app_equipement_edit', {'id': equipement.id}) }}" class="btn btn-primary btn-sm">Edit</a>
+                                        </td>
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                        <td colspan="6">No records found</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="text-center">
+                        <a href="{{ path('app_equipement_new') }}" class="btn btn-success">Create new</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .search-input {
+            width: 50%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .input-group-append button {
+            border-radius: 0 4px 4px 0;
+        }
+    </style>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#search-input").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("table tbody tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+{% endblock %}

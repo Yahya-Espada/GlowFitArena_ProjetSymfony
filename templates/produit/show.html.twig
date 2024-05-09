@@ -1,0 +1,52 @@
+{% extends 'admin1/base.html.twig' %}
+
+{% block title %}Produit{% endblock %}
+
+{% block body %}
+<div class="content-body">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-9">
+                <h1>Produit</h1>
+
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th>IdProduit</th>
+                            <td>{{ produit.idProduit }}</td>
+                        </tr>
+                        <tr>
+                            <th>Libelle</th>
+                            <td>{{ produit.libelle }}</td>
+                        </tr>
+                        <tr>
+                            <th>Quantite</th>
+                            <td>{{ produit.quantite }}</td>
+                        </tr>
+                        <tr>
+                            <th>Prix</th>
+                            <td>{{ produit.prix }}</td>
+                        </tr>
+                        <tr>
+                            <th>PhotoProduit</th>
+                            <td>
+                                {% if produit.photoProduit %}
+                                    <img src="{{ asset('uploads/' ~ produit.photoProduit) }}" alt="Product Image">
+                                {% else %}
+                                    No image available
+                                {% endif %}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <a href="{{ path('app_produit_index') }}">Back to list</a>
+
+                <a href="{{ path('app_produit_edit', {'idProduit': produit.idProduit}) }}">Edit</a>
+
+                {{ include('produit/_delete_form.html.twig') }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

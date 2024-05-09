@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Statistiques des Repas{% endblock %}
+
+{% block body %}
+    <h1>Statistiques des Repas</h1>
+    <div style="width: 80%; margin: auto;">
+        <canvas id="repasChart"></canvas>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <script>
+        // Définir les données de statistiques statiques
+        const disponibleCount = 40; // 40% de repas disponibles
+        const nondisponibleCount = 60; // 60% de repas non disponibles
+
+        // Créer un graphique circulaire (pie chart) avec Chart.js
+        const ctx = document.getElementById('repasChart').getContext('2d');
+        const repasChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['Disponible', 'Non disponible'],
+                datasets: [{
+                    label: 'Statistiques des repas',
+                    data: [disponibleCount, nondisponibleCount],
+                    backgroundColor: [
+                        'rgba(75, 192, 192, 0.6)', // Couleur pour les repas disponibles
+                        'rgba(255, 99, 132, 0.6)' // Couleur pour les repas non disponibles
+                    ],
+                    borderColor: [
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(255, 99, 132, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+    </script>
+{% endblock %}

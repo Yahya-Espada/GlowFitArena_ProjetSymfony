@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Reservation{% endblock %}
+
+{% block body %}
+<br><br><br>
+
+{% if qrCodeResult is defined %}
+     <center>     {{ qrCodeResult.getString() | raw }}   </center>   
+     <center>  <button id="submitButton" type="submit">OK</button> <!-- Bouton "OK" -->
+     </center>
+{% endif %}
+
+a>
+
+<script>
+    // Rediriger vers frontres après 30 secondes
+    setTimeout(function() {
+        window.location.href = "{{ path('frontres') }}";
+    }, 30000); 
+
+    // Ajouter un gestionnaire d'événement pour le clic sur le bouton "OK"
+    document.getElementById("submitButton").addEventListener("click", function(event) {
+        // Empêcher le comportement par défaut du formulaire pour éviter une soumission involontaire
+        event.preventDefault();
+        // Rediriger vers frontres
+        window.location.href = "{{ path('frontres') }}";
+    });
+</script>
+{% endblock %}

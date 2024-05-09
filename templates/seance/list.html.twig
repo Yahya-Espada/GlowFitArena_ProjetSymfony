@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Liste des séances en PDF</title>
+		<style>
+			body {
+				font-family: Arial, sans-serif;
+			}
+			h1 {
+				text-align: center;
+			}
+			table {
+				width: 100%;
+				border-collapse: collapse;
+			}
+			th,
+			td {
+				border: 1px solid #ddd;
+				padding: 8px;
+				text-align: left;
+			}
+			th {
+				background-color: #f2f2f2;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Liste des Séances</h1>
+		<table>
+			<thead>
+				<tr>
+					<th>Heure Début</th>
+					<th>Heure Fin</th>
+					<th>Prix</th>
+					<th>Type de Séance</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for seance in seances %}
+					<tr>
+						<td>{{ seance.heuredebut }}</td>
+						<td>{{ seance.heurefin }}</td>
+						<td>{{ seance.prix }}</td>
+						<td>{{ seance.typeSeance }}</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</body>
+</html>

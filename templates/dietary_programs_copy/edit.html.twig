@@ -1,0 +1,103 @@
+{% extends 'baseYah.html.twig' %}
+
+{% block title %}Edit DietaryProgramsCopy{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .card-header {
+            border: none;
+            padding-bottom: 0;
+        }
+
+        .card-header h2 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 24px;
+            color: #333;
+        }
+
+        .card-body {
+            padding: 0;
+        }
+
+        .card-body .form-group {
+            margin-bottom: 20px;
+        }
+
+        .card-body label {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .card-body input[type="text"],
+        .card-body input[type="email"],
+        .card-body textarea {
+            width: 180%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-top: 5px;
+        }
+
+        .card-body input[type="text"]:focus,
+        .card-body input[type="email"]:focus,
+        .card-body textarea:focus {
+            outline: none;
+            border-color: #5d9cec;
+        }
+
+        .card-body button[type="submit"] {
+            width: auto;
+            padding: 10px;
+            background-color: #5d9cec;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .card-body button[type="submit"]:hover {
+            background-color: #4a89dc;
+        }
+
+        .back-to-list {
+            color: #5d9cec;
+            text-decoration: none;
+            margin-top: 10px;
+            display: inline-block;
+        }
+
+        .back-to-list:hover {
+            text-decoration: underline;
+        }
+    </style>
+{% endblock %}
+
+
+{% block body %}
+    <div class="row justify-content-center">
+        <div class="col-xl-4 col-lg-12 col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Edit DietaryPrograms</h2>
+                </div>
+                <div class="card-body" style="margin-bottom: 60px">
+                    <a href="{{ path('app_dietary_programs_copy_index') }}" class="back-to-list">back to list</a>
+                    <div style="display: flex; justify-content: space-between;">
+                        {{ include('dietary_programs_copy/_form.html.twig', {'button_label': 'Update'}) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

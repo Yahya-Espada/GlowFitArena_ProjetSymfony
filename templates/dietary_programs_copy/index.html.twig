@@ -1,0 +1,93 @@
+{% extends 'baseYah.html.twig' %}
+
+{% block title %}DietaryProgramsCopy index{% endblock %}
+
+{% block body %}
+    <div class="content-body">
+        <div class="container-fluid">
+
+            <!-- row -->
+
+            <div class="row">
+
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Liste des programmes alimentaires</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-responsive-md">
+                                    <thead>
+                                    <tr>
+
+                                        <th><strong>ID</strong></th>
+                                        <th><strong>Name</strong></th>
+                                        <th><strong>Description</strong></th>
+                                        <th><strong>StartDate</strong></th>
+                                        <th><strong>EndDate</strong></th>
+                                        <th><strong>CalorieGoal</strong></th>
+                                        <th><strong>MacroRatioCarbs</strong></th>
+                                        <th><strong>MacroRatioProtein</strong></th>
+                                        <th><strong>MacroRatioFat</strong></th>
+                                        <th><strong>MealTypes</strong></th>
+                                        <th><strong>Notes</strong></th>
+                                        <th><strong>Action</strong></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for dietary_programs_copy in dietary_programs_copies %}
+
+                                    <tr>
+
+                                        <td><strong>{{ dietary_programs_copy.id }}</strong></td>
+                                        <td>
+                                            <div class="d-flex align-items-center"><img
+                                                        src="images/avatar/1.jpg" class="rounded-lg me-2" width="24"
+                                                        alt=""> <span class="w-space-no">{{ dietary_programs_copy.name }}
+                                            </span></div>
+
+                                        </td>
+                                        <td>{{dietary_programs_copy.description[:50] }} </td>
+
+                                        <td>{{ dietary_programs_copy.startDate ? dietary_programs_copy.startDate|date('Y-m-d') : '' }}</td>
+                                        <td>{{ dietary_programs_copy.endDate ? dietary_programs_copy.endDate|date('Y-m-d') : '' }}</td>
+                                        <td>
+                                            <div class="d-flex align-items-center"> {{ dietary_programs_copy.calorieGoal }}
+                                            </div>
+                                        </td>
+
+                                        <td>{{ dietary_programs_copy.macroRatioCarbs }}</td>
+                                        <td>{{ dietary_programs_copy.macroRatioProtein }}</td>
+                                        <td>{{ dietary_programs_copy.macroRatioFat }}</td>
+                                        <td>{{ dietary_programs_copy.mealTypes[:50] }}</td>
+                                        <td>{{ dietary_programs_copy.notes[:50] }}</td>
+                                        <td>
+
+                                            <div class="d-flex">
+                                                <a href="{{ path('app_dietary_programs_copy_edit', {'id': dietary_programs_copy.id}) }}" class="btn btn-primary shadow btn-xs sharp me-1"><i
+                                                            class="fas fa-pencil-alt"></i></a>
+                                                <a href="{{ path('app_dietary_programs_copy_show', {'id': dietary_programs_copy.id}) }}" class="btn btn-primary shadow btn-xs sharp me-1"><i class="bi bi-eye"> </i></a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+
+                                        {% endfor %}
+                                    </tbody>
+                                    <a href="{{ path('app_dietary_programs_copy_new') }}" class="btn btn-primary">Create new</a>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endblock %}

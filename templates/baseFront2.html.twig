@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+    <head>
+     <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="" />
+  <meta name="keywords" content="" />
+  <meta name="author" content="Free-Template.co" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="shortcut icon" href="{{ asset('assets_client/ftco-32x32.png') }}">
+    <link href="https://fonts.googleapis.com/css?family=Muli:300,400,700,900" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('assets_client/fonts/icomoon/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets_client/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets_client/css/jquery-ui.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets_client/css/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets_client/css/owl.theme.default.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets_client/css/jquery.fancybox.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets_client/css/bootstrap-datepicker.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets_client/fonts/flaticon/font/flaticon.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets_client/css/aos.css') }}">
+    <link href="{{ asset('assets_client/css/jquery.mb.YTPlayer.min.css') }}" media="all" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="{{ asset('assets_client/css/style.css') }}">
+
+
+        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+    </head>
+    <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300" >
+    <div class="site-wrap">
+
+    <div class="site-mobile-menu site-navbar-target">
+      <div class="site-mobile-menu-header">
+        <div class="site-mobile-menu-close mt-3">
+          <span class="icon-close2 js-menu-toggle"></span>
+        </div>
+      </div>
+      <div class="site-mobile-menu-body"></div>
+    </div>
+
+
+    <header class="site-navbar py-4 js-sticky-header site-navbar-target" role="banner">
+
+      <div class="container-fluid">
+        <div class="d-flex align-items-center">
+          <div class="site-logo"><a href="index.html">Stamina<span>.</span> </a></div>
+          <div class="ml-auto">
+            <nav class="site-navigation position-relative text-right" role="navigation">
+              <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
+                <li><a href="#home-section" class="nav-link">Home</a></li>
+                <li><a href="#classes-section" class="nav-link">Classes</a></li>
+                <li><a href="#schedule-section" class="nav-link">Schedule</a></li>
+                <li><a href="#trainer-section" class="nav-link">Trainer</a></li>
+                <li><a href="#services-section" class="nav-link">Services</a></li>
+                <li>                {% if WithconnectedUser is defined %}
+          <a href="{{path("app_user_logout")}}" class="nav-link">
+Logout
+          </a>
+          {% else %}
+ <a href="{{path("app_user_login")}}" class="nav-link">
+      Login
+          </a>
+          
+          {% endif %}
+          </li>
+ 
+              </ul>
+            </nav>
+            <a href="#" class="d-inline-block d-lg-none site-menu-toggle js-menu-toggle float-right"><span class="icon-menu h3"></span></a>
+          </div>
+
+        </div>
+      </div>
+
+    </header>
+
+    <a id="bgndVideo" class="player"
+      data-property="{videoURL:'https://www.youtube.com/watch?v=w-cRWOjlk8c',showYTLogo:false, showAnnotations: false, showControls: false, cc_load_policy: false, containment:'#home-section',autoPlay:true, mute:true, startAt:255, stopAt: 271, opacity:1}">
+    </a>
+
+    <div class="intro-section" id="home-section" style="background-color: #ccc;">
+      <div class="container">
+
+        <div class="row align-items-center">
+          <div class="col-lg-12 mx-auto text-center" data-aos="fade-up">
+            <h1 class="mb-3">We Believe Little Things Matter</h1>
+            <p class="lead mx-auto desc mb-5">A new free template for fitness website template created with love by the fine folks at <a href="https://free-template.co" target="_blank">Free-Template.co</a></p>
+            <p class="text-center">
+              <a href="#" class="btn btn-outline-white py-3 px-5">Get Started</a>
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="schedule-wrap">
+
+
+
+      <div class="d-md-flex align-items-center">
+        <div class="hours mr-md-4 mb-4 mb-lg-0">
+          <strong class="d-block">Hours</strong>
+          Opening: 7:30am &mdash;
+          Closing: 9:00pm
+        </div>
+        <div class="cta ml-auto">
+       
+        </div>
+      </div>
+    </div>
+
+    <div class="site-section">
+      <div class="container">
+
+  {% block content %}{% endblock %}
+      
+
+      </div>
+
+    </div>
+                
+
+
+           <script src="{{ asset('assets_client/js/jquery-3.3.1.min.js') }}"></script>
+    <script src="{{ asset('assets_client/js/jquery-migrate-3.0.1.min.js') }}"></script>
+    <script src="{{ asset('assets_client/js/jquery-ui.js') }}"></script>
+    <script src="{{ asset('assets_client/js/popper.min.js') }}"></script>
+    <script src="{{ asset('assets_client/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('assets_client/js/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('assets_client/js/jquery.stellar.min.js') }}"></script>
+    <script src="{{ asset('assets_client/js/jquery.countdown.min.js') }}"></script>
+    <script src="{{ asset('assets_client/js/bootstrap-datepicker.min.js') }}"></script>
+    <script src="{{ asset('assets_client/js/jquery.easing.1.3.js') }}"></script>
+    <script src="{{ asset('assets_client/js/aos.js') }}"></script>
+    <script src="{{ asset('assets_client/js/jquery.fancybox.min.js') }}"></script>
+    <script src="{{ asset('assets_client/js/jquery.sticky.js') }}"></script>
+    <script src="{{ asset('assets_client/js/jquery.mb.YTPlayer.min.js') }}"></script>
+
+    <script src="{{ asset('assets_client/js/main.js') }}"></script>
+    
+    </body>
+</html>

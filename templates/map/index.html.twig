@@ -1,0 +1,28 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Map Page{% endblock %}
+
+{% block body %}
+    <h1>Map Page</h1>
+
+    <!-- Map container -->
+    <div id="map" style="height: 400px;"></div>
+
+    <!-- JavaScript to initialize the map -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var mapDiv = document.getElementById('map');
+            var map = L.map(mapDiv).setView([51.505, -0.09], 13); // Default view
+
+            // Leaflet tile layer
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: 'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            // Example marker
+            var marker = L.marker([51.5, -0.09]).addTo(map);
+        });
+    </script>
+{% endblock %}

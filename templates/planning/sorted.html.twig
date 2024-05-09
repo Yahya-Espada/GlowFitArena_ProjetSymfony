@@ -1,0 +1,40 @@
+{% extends '/admin2/base.html.twig' %}
+
+{% block body %}
+	<div class="content-body">
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Idplanning</th>
+					<th>Titre</th>
+					<th>
+						Nbseance
+					</th>
+					<th>Prix</th>
+					<th>actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for planning in plannings %}
+					<tr>
+						<td>{{ planning.idplanning }}</td>
+						<td>{{ planning.titre }}</td>
+						<td>{{ planning.nbseance }}</td>
+						<td>{{ planning.prix }}</td>
+						<td>
+							<a href="{{ path('app_planning_show', {'idplanning': planning.idplanning}) }}">show</a>
+							<a href="{{ path('app_planning_edit', {'idplanning': planning.idplanning}) }}">edit</a>
+						</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="5">no records found</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+
+		<a href="{{ path('app_planning_new') }}">Create new</a>
+	</div>
+{% endblock %}

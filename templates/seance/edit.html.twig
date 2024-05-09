@@ -1,0 +1,13 @@
+{% extends '/admin2/base.html.twig' %}
+
+{% block body %}
+
+	<div class="content-body">
+
+		{{ include('seance/_form.html.twig', {'button_label': 'Update'}) }}
+
+		<a href="{{ path('app_seance_index') }}">back to list</a>
+
+		{{ include('seance/_delete_form.html.twig') }}
+	</div>
+{% endblock %}
