@@ -182,7 +182,7 @@ $twilioPhoneNumber = getenv('TWILIO_PHONE_NUMBER');*/
     #[Route('/admin', name: 'app_user_index')]
     public function index(Request $request ,UserRepository $userRepository,SessionInterface $sessionInterface): Response
     {   
-        if(!$this->hasPermissionToRoute($sessionInterface,$userRepository,"admin")){
+        if(!UserController::hasPermissionToRoute($sessionInterface,$userRepository,"admin")){
             return $this->redirectToRoute("app_user_login");
         }
         $roles=$userRepository->findRolesFromDataBase();
@@ -209,8 +209,8 @@ $twilioPhoneNumber = getenv('TWILIO_PHONE_NUMBER');*/
         ]);
     }
     }
-    public function hasPermissionToRoute(SessionInterface $sessionInterface,UserRepository $userRepository,string $role){
-        $user=$this->getConnectedUser($sessionInterface,$userRepository);
+    public  static function hasPermissionToRoute(SessionInterface $sessionInterface,UserRepository $userRepository,string $role){
+        $user=UserController::getConnectedUser($sessionInterface,$userRepository);
         if($user==null){
             return false;
         }    
@@ -218,7 +218,7 @@ $twilioPhoneNumber = getenv('TWILIO_PHONE_NUMBER');*/
     
 
     }
-    public function getConnectedUser(SessionInterface $sessionInterface,UserRepository $userRepository){
+    public static function getConnectedUser(SessionInterface $sessionInterface,UserRepository $userRepository){
         $id_user=$sessionInterface->get('id_user');
         //var_dump($id_user);
        
@@ -233,15 +233,15 @@ $twilioPhoneNumber = getenv('TWILIO_PHONE_NUMBER');*/
     public function login(Request $request,UserRepository $userRepository,SessionInterface $sessionInterface): Response
     {
         if($sessionInterface->get('id_user')!=null){
-            if($this->hasPermissionToRoute($sessionInterface,$userRepository,"admin")){
+            if(UserController::hasPermissionToRoute($sessionInterface,$userRepository,"admin")){
                 //redirect to admin dashboard;
             return    $this->redirectToRoute("app_user_index");
-            }else if($this->hasPermissionToRoute($sessionInterface,$userRepository,"user")){
+            }else if(UserController::hasPermissionToRoute($sessionInterface,$userRepository,"user")){
                 //redirect to profile user;
             return    $this->redirectToRoute("app_user_profil");
             }else{
                 //redirect to coach dashboard 
-                return    $this->redirectToRoute("gestion_programme_alimentaire");
+                return    $this->redirectToRoute("app_planning_show",["userId"=>$sessionInterface->get('id_user')]);
 
             }
         }else{
@@ -289,11 +289,11 @@ $twilioPhoneNumber = getenv('TWILIO_PHONE_NUMBER');*/
     #[Route('/profil', name: 'app_user_profil', methods: ['GET'])]
     public function profil(UserRepository $userRepository,SessionInterface $sessionInterface): Response
     {   
-        if(!$this->hasPermissionToRoute($sessionInterface,$userRepository,"user")){
+        if(!UserController::hasPermissionToRoute($sessionInterface,$userRepository,"user")){
             return $this->redirectToRoute("app_user_login");
         }
         return $this->render('user/profil.html.twig', [
-            'user' => $this->getConnectedUser($sessionInterface,$userRepository),
+            'user' => UserController::getConnectedUser($sessionInterface,$userRepository),
             'WithconnectedUser'=>true
 
         ]);
@@ -301,7 +301,7 @@ $twilioPhoneNumber = getenv('TWILIO_PHONE_NUMBER');*/
     #[Route('/profil_edit', name: 'app_user_edit_profil')]
     public function editProfil(Request $request,  EntityManagerInterface $entityManager,SessionInterface $sessionInterface,UserRepository $userRepository,SluggerInterface $slugger): Response
     {  
-        $user=$this->getConnectedUser($sessionInterface,$userRepository);
+        $user=UserController::getConnectedUser($sessionInterface,$userRepository);
         $originalImage = $user->getImage();
 
         $form = $this->createForm(SubcriptionFormType::class, $user);
@@ -405,7 +405,7 @@ public function inscription(Request $request, EntityManagerInterface $entityMana
 
         #[Route('/new', name: 'app_user_new')]
     public function new(Request $request, EntityManagerInterface $entityManager,SessionInterface $sessionInterface,UserRepository $userRepository,SluggerInterface $slugger): Response
-    { if(!$this->hasPermissionToRoute($sessionInterface,$userRepository,"admin")){
+    { if(!UserController::hasPermissionToRoute($sessionInterface,$userRepository,"admin")){
         return $this->redirectToRoute("app_user_login");
     }
         $user = new User();
@@ -450,7 +450,7 @@ public function inscription(Request $request, EntityManagerInterface $entityMana
     #[Route('/show/{id}', name: 'app_user_show', methods: ['GET'])]
     public function show(User $user, UserRepository $userRepository,SessionInterface $sessionInterface): Response
     {
-        if(!$this->hasPermissionToRoute($sessionInterface,$userRepository,"admin")){
+        if(!UserController::hasPermissionToRoute($sessionInterface,$userRepository,"admin")){
         return $this->redirectToRoute("app_user_login");
     }
         return $this->render('user/show.html.twig', [
@@ -461,7 +461,7 @@ public function inscription(Request $request, EntityManagerInterface $entityMana
     #[Route('/{id}/edit', name: 'app_user_edit')]
     public function edit(Request $request, User $user, EntityManagerInterface $entityManager,SessionInterface $sessionInterface,UserRepository $userRepository,SluggerInterface $slugger): Response
     {      $originalImage = $user->getImage();
-        if(!$this->hasPermissionToRoute($sessionInterface,$userRepository,"admin")){
+        if(!UserController::hasPermissionToRoute($sessionInterface,$userRepository,"admin")){
             return $this->redirectToRoute("app_user_login");
         }
         $form = $this->createForm(SubcriptionFormType::class, $user);
@@ -519,7 +519,7 @@ public function inscription(Request $request, EntityManagerInterface $entityMana
     #[Route('/{id}', name: 'app_user_delete', methods: ['POST'])]
     public function delete(Request $request, User $user, EntityManagerInterface $entityManager,UserRepository $userRepository,SessionInterface $sessionInterface): Response
     {
-        if(!$this->hasPermissionToRoute($sessionInterface,$userRepository,"admin")){
+        if(!UserController::hasPermissionToRoute($sessionInterface,$userRepository,"admin")){
             return $this->redirectToRoute("app_user_login");
         }
         if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
@@ -547,7 +547,7 @@ public function inscription(Request $request, EntityManagerInterface $entityMana
     #[Route('/search', name: 'app_user_search', methods: ['GET'])]
     public function search(Request $request, UserRepository $userRepository, SessionInterface $sessionInterface): Response
     {
-        if (!$this->hasPermissionToRoute($sessionInterface, $userRepository, "admin")) {
+        if (!UserController::hasPermissionToRoute($sessionInterface, $userRepository, "admin")) {
             return $this->redirectToRoute("app_user_login");
         }
     

@@ -59,18 +59,16 @@
                 <li><a href="{{path('app_reservation_new')}}" class="nav-link">Reservation</a></li>
 
                 
-                <li><a href="#classes-section" class="nav-link">Classes</a></li>
-                <li><a href="#schedule-section" class="nav-link">Schedule</a></li>
-                <li><a href="#trainer-section" class="nav-link">Trainer</a></li>
-                <li><a href="#services-section" class="nav-link">Services</a></li>
-                <li>                {% if WithconnectedUser is defined %}
-          <a href="{{path("app_user_logout")}}" class="nav-link">
-Logout
-          </a>
+                 {% if WithconnectedUser is defined %}
+                <li><a href="{{path("app_user_logout")}}" class="nav-link"> Logout </a></li>
           {% else %}
+                          <li><a href="{{path("app_inscription_new")}}" class="nav-link">Sign up</a></li>
+
+          <li>
  <a href="{{path("app_user_login")}}" class="nav-link">
       Login
           </a>
+          </li>
           
           {% endif %}
           </li>

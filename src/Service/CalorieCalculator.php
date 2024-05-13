@@ -5,6 +5,7 @@ namespace App\Service;
 
 
 use App\Interfaces\CalorieCalculatorInterface;
+use InvalidArgumentException;
 
 class CalorieCalculator implements CalorieCalculatorInterface
 {

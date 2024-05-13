@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Evenement;
 use App\Form\EvenementType;
 use App\Repository\EvenementRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,8 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Knp\Component\Pager\PaginatorInterface;
 use Dompdf\Dompdf;
-
-
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class EvenementController extends AbstractController
 {
@@ -29,9 +29,12 @@ class EvenementController extends AbstractController
         ]);
     }
     #[Route('evenement/', name: 'app_evenement_index', methods: ['GET'])]
-    public function index(EvenementRepository $evenementRepository, PaginatorInterface $paginator, Request $request): Response
-    {
+    public function index(EvenementRepository $evenementRepository,SessionInterface $sessionInterface,UserRepository $userRepository, PaginatorInterface $paginator, Request $request): Response
+    {  
+        if(!UserController::hasPermissionToRoute($sessionInterface,$userRepository,"admin")){
+            return   $this->redirectToRoute("app_user_login");
 
+        }
         $evenements = $evenementRepository->findAllSortedByTitre();
 
         //$query = $evenementRepository->findAll(); // Assuming you have a custom query method in ClubRepository
@@ -42,6 +45,8 @@ class EvenementController extends AbstractController
         );
         return $this->render('evenement/index.html.twig', [
             'evenements' => $evenements,
+            'WithconnectedUser'=>true,
+
         ]);
     }
 
@@ -154,9 +159,12 @@ class EvenementController extends AbstractController
         return $this->redirectToRoute('app_evenement_index', [], Response::HTTP_SEE_OTHER);
     }
     #[Route('event/', name: 'app_evenement_indexFront', methods: ['GET'])]
-    public function indexFront(EvenementRepository $evenementRepository, PaginatorInterface $paginator, Request $request): Response
+    public function indexFront(EvenementRepository $evenementRepository, PaginatorInterface $paginator, Request $request,SessionInterface $sessionInterface,UserRepository $userRepository): Response
     {
+        if(!UserController::getConnectedUser($sessionInterface,$userRepository)){
+            return   $this->redirectToRoute("app_user_login");
 
+        }
         $evenements = $evenementRepository->findAllSortedByTitre();
 
         //$query = $evenementRepository->findAll(); // Assuming you have a custom query method in ClubRepository
@@ -167,6 +175,8 @@ class EvenementController extends AbstractController
         );
         return $this->render('evenement/indexFront.html.twig', [
             'evenements' => $evenements,
+            'WithconnectedUser'=>true,
+
         ]);
     }
 
