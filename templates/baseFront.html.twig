@@ -48,15 +48,14 @@
 
       <div class="container-fluid">
         <div class="d-flex align-items-center">
-          <div class="site-logo"><a href="index.html">Stamina<span>.</span> </a></div>
+          <div class="site-logo"><a href="index.html">GlowFit<span>.</span> </a></div>
           <div class="ml-auto">
             <nav class="site-navigation position-relative text-right" role="navigation">
               <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
                 <li><a href="#home-section" class="nav-link">Home</a></li>
                 <li><a href="{{path('app_evenement_indexFront')}}" class="nav-link">Events</a></li>
-                <li><a href="{{path('app_produit_index1')}}" class="nav-link">produit</a></li>
-                <li><a href="{{path('app_equipement_new')}}" class="nav-link">Equipement</a></li>
-                <li><a href="{{path('app_reservation_new')}}" class="nav-link">Reservation</a></li>
+                <li><a href="{{path('app_produit_index1')}}" class="nav-link">produits</a></li>
+                  <li><a href="{{path('app_landing_page')}}" class="nav-link">Programme Alimentaire</a></li>
 
                 
                  {% if WithconnectedUser is defined %}
@@ -92,7 +91,7 @@
 
         <div class="row align-items-center">
           <div class="col-lg-12 mx-auto text-center" data-aos="fade-up">
-            <h1 class="mb-3">We Believe Little Things Matter</h1>
+            <h1 class="mb-3">Welcome To GlowFIT Arena</h1>
             <p class="lead mx-auto desc mb-5">A new free template for fitness website template created with love by the fine folks at <a href="https://free-template.co" target="_blank">Free-Template.co</a></p>
             <p class="text-center">
               <a href="#" class="btn btn-outline-white py-3 px-5">Get Started</a>
@@ -147,6 +146,6 @@
     <script src="{{ asset('assets_client/js/jquery.mb.YTPlayer.min.js') }}"></script>
 
     <script src="{{ asset('assets_client/js/main.js') }}"></script>
-    
+    </div>
     </body>
 </html>

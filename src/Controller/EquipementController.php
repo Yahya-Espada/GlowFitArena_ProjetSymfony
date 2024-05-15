@@ -5,10 +5,12 @@ namespace App\Controller;
 use App\Entity\Equipement;
 use App\Form\EquipementType;
 use App\Repository\EquipementRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Service\QrCodeGenerator;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -34,16 +36,26 @@ class EquipementController extends AbstractController
 
 
     #[Route('/', name: 'app_equipement_index', methods: ['GET'])]
-    public function index(EquipementRepository $equipementRepository): Response
+    public function index(EquipementRepository $equipementRepository,SessionInterface $sessionInterface,UserRepository $userRepository): Response
     {
+
+        if(!UserController::getConnectedUser($sessionInterface,$userRepository)){
+            return   $this->redirectToRoute("app_user_login");
+
+        }
+
         return $this->render('equipement/index.html.twig', [
             'equipements' => $equipementRepository->findAll(),
+            'WithconnectedUser'=>true,
         ]);
     }
 
     #[Route('/new', name: 'app_equipement_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager,): Response
     {
+
+
+
         $equipement = new Equipement();
         $form = $this->createForm(EquipementType::class, $equipement);
         $form->handleRequest($request);
@@ -58,6 +70,7 @@ class EquipementController extends AbstractController
         return $this->renderForm('equipement/new.html.twig', [
             'equipement' => $equipement,
             'form' => $form,
+
         ]);
     }
 

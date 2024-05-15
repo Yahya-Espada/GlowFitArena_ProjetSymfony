@@ -1,0 +1,41 @@
+{% extends 'baseYah.html.twig' %}
+
+{% block title %}Central Hub{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .body-content {
+            margin-left: 250px; /* Same as the width of the sidebar */
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="body-content">
+    <div class="container">
+        <h1 class="text-center my-5">Welcome to the Central Hub</h1>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Dietary Program Interfaces</h5>
+                        <p class="card-text">Access various dietary programs offered.</p>
+                        <a href="{{ path('app_dietary_programs_copy_index') }}" class="btn btn-primary">Go to Dietary Programs</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Subscriber Information Interfaces</h5>
+                        <p class="card-text">Access your subscriber information.</p>
+                        <a href="{{ path('app_subscriber_info_index') }}" class="btn btn-primary">Go to Subscriber Info</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+{% endblock %}

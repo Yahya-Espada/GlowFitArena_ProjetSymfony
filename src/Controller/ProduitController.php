@@ -5,10 +5,12 @@ namespace App\Controller;
 use App\Entity\Produit;
 use App\Form\ProduitType;
 use App\Repository\ProduitRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\StreamedResponse;
@@ -63,8 +65,14 @@ class ProduitController extends AbstractController
     }
     
     #[Route('/produit/afficherfront', name: 'app_produit_index1', methods: ['GET'])]
-    public function front(Request $request, ProduitRepository $produitRepository): Response
+    public function front(Request $request,SessionInterface $sessionInterface,UserRepository $userRepository, ProduitRepository $produitRepository): Response
     {
+
+        if(!UserController::getConnectedUser($sessionInterface,$userRepository)){
+            return   $this->redirectToRoute("app_user_login");
+
+        }
+
         $searchQuery = $request->query->get('search');
         
         if ($searchQuery) {
@@ -76,6 +84,7 @@ class ProduitController extends AbstractController
         return $this->render('index1.html.twig', [
             'produits' => $produits,
             'searchQuery' => $searchQuery,
+            'WithconnectedUser'=>true,
         ]);
     }
 

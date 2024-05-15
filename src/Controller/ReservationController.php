@@ -4,10 +4,12 @@ namespace App\Controller;
 
 use App\Entity\Reservation;
 use App\Form\ReservationType;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\ReservationRepository;
 
@@ -29,16 +31,26 @@ class ReservationController extends AbstractController
     }
 
     #[Route('/', name: 'app_reservation_index', methods: ['GET'])]
-    public function index(ReservationRepository $reservationRepository): Response
+    public function index(ReservationRepository $reservationRepository,SessionInterface $sessionInterface,UserRepository $userRepository): Response
     {
+
+        if(!UserController::getConnectedUser($sessionInterface,$userRepository)){
+            return   $this->redirectToRoute("app_user_login");
+
+        }
+
         return $this->render('reservation/index.html.twig', [
             'reservations' => $reservationRepository->findAll(),
+            'WithconnectedUser'=>true,
         ]);
     }
+
+
 
     #[Route('/new', name: 'app_reservation_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
+
         $reservation = new Reservation();
         $form = $this->createForm(ReservationType::class, $reservation);
         $form->handleRequest($request);
@@ -60,6 +72,13 @@ class ReservationController extends AbstractController
     public function show(Reservation $reservation): Response
     {
         return $this->render('reservation/show.html.twig', [
+            'reservation' => $reservation,
+        ]);
+    }
+    #[Route('/', name: 'app_reservation_show1', methods: ['GET'])]
+    public function show1(Reservation $reservation): Response
+    {
+        return $this->render('reservation/show1.html.twig', [
             'reservation' => $reservation,
         ]);
     }

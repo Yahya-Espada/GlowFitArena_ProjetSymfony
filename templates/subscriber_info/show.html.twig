@@ -1,8 +1,8 @@
-{% extends 'baseYah.html.twig' %}
+{% extends 'baseFront.html.twig' %}
 
 {% block title %}SubscriberInfo{% endblock %}
 
-{% block body %}
+{% block content %}
     <div class="row justify-content-center">
         <div class="col-xl-4 col-lg-12 col-sm-12">
             <div class="card" >
@@ -58,10 +58,10 @@
                         </li>
                     </ul>
 
-                    <a href="{{ path('app_subscriber_info_index') }}" class="btn btn-primary btn-xxs shadow">back to list</a>
-                    <a href="{{ path('app_subscriber_info_edit', {'id': subscriber_info.id}) }}" class="btn btn-primary btn-xxs shadow">Edit</a>
+                    <a href="{{ path('app_landing_page') }}" class="btn btn-primary btn-xxs shadow">back to landing page</a>
+                <!--    <a href="{{ path('app_subscriber_info_edit', {'id': subscriber_info.id}) }}" class="btn btn-primary btn-xxs shadow">Edit</a>
+                    -->
 
-                    {{ include('subscriber_info/_delete_form.html.twig') }}
                 </div>
             </div>
         </div>

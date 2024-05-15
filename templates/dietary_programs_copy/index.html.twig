@@ -1,4 +1,4 @@
-{% extends 'baseYah.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block title %}DietaryProgramsCopy index{% endblock %}
 
@@ -67,7 +67,10 @@
                                             <div class="d-flex">
                                                 <a href="{{ path('app_dietary_programs_copy_edit', {'id': dietary_programs_copy.id}) }}" class="btn btn-primary shadow btn-xs sharp me-1"><i
                                                             class="fas fa-pencil-alt"></i></a>
-                                                <a href="{{ path('app_dietary_programs_copy_show', {'id': dietary_programs_copy.id}) }}" class="btn btn-primary shadow btn-xs sharp me-1"><i class="bi bi-eye"> </i></a>
+                                          <!--      <a href="{{ path('app_dietary_programs_copy_show', {'id': dietary_programs_copy.id}) }}" class="btn btn-primary shadow btn-xs sharp me-1"><i class="bi bi-eye"> </i></a> -->
+                                                <a class="btn btn-danger shadow btn-xs sharp">
+                                                    <i class="fas fa-trash-alt"> {{ include('dietary_programs_copy/_delete_form.html.twig') }} </i>
+                                                </a>
                                             </div>
                                         </td>
                                     </tr>

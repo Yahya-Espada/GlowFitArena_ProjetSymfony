@@ -168,5 +168,5 @@ class DietaryProgramsCopyController extends AbstractController
 
         // Send some text response
         $this->addFlash('success', 'The PDF file has been successfully generated!');
-        return $this->redirectToRoute('app_dietary_programs_copy_index');    }
+        return $this->redirectToRoute('app_landing_page');    }
 }

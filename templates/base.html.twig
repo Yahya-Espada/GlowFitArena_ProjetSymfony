@@ -58,6 +58,13 @@
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{path('app_user_index')}}">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Users</span>
+                </a>
+
            <li class="nav-item">
     <a class="nav-link" href="{{ path('app_evenement_index') }}">
         <i class="fas fa-fw fa-cog"></i>
@@ -71,6 +78,14 @@
         <span>Participations</span>
     </a>
 </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('app_produit_index') }}">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Produits</span>
+                </a>
+            </li>
+
      <li class="nav-item">
     <a class="nav-link" href="{{ path('app_reservation_index') }}">
         <i class="fas fa-fw fa-cog"></i>
@@ -95,6 +110,21 @@
                     <span>subscriber information</span>
                 </a>
             </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('app_planning_index') }}">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Planning</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('app_seance_index') }}">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Seance</span>
+                </a>
+            </li>
+
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
@@ -398,14 +428,9 @@
                 <!-- End of Topbar -->
 
             <body>
-<div style="margin-left: 20px;">
-<div class="text-right">
-    <a href="{{ path('app_pdf_generate') }}" class="btn btn-primary ml-auto">Télécharger PDF</a>
-         <button id="sortButton" class="btn btn-primary ml-auto">Tri descendant</button>
 
-</div>
         {% block body %}{% endblock %}
-    </div>
+
             </body>
 
                         
@@ -450,7 +475,7 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <a class="btn btn-primary" href="{{path("app_user_logout")}}">Logout</a>
                 </div>
             </div>
         </div>

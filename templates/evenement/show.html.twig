@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'baseFront.html.twig' %}
 
 {% block title %}Evenement{% endblock %}
 
@@ -40,7 +40,4 @@
 
     <a href="{{ path('app_evenement_index') }}">back to list</a>
 
-    <a href="{{ path('app_evenement_edit', {'id': evenement.id}) }}">edit</a>
-
-    {{ include('evenement/_delete_form.html.twig') }}
 {% endblock %}

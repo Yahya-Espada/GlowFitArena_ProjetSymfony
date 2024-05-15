@@ -9,6 +9,13 @@
     <div class="table-responsive">
 <!-- Add this search form at the top of your template -->
 
+        <div style="margin-left: 20px;">
+            <div class="text-right">
+                <a href="{{ path('app_pdf_generate') }}" class="btn btn-primary ml-auto">Télécharger PDF</a>
+                <button id="sortButton" class="btn btn-primary ml-auto">Tri descendant</button>
+            </div>
+            </div>
+
     <div class="section-title">
     <input type="text" id="search" class="form-control" placeholder="Search" oninput="search()" style="width: 400px;">
 </div>
@@ -37,7 +44,7 @@
                         No image available
                     {% endif %}
                 </td>
-                        <a href="{{ path('app_evenement_show', {'id': evenement.id}) }}" class="btn btn-primary show-club">show</a>
+                      <!--  <a href="{{ path('app_evenement_show', {'id': evenement.id}) }}" class="btn btn-primary show-club">show</a> -->
                     <a href="{{ path('app_evenement_edit', {'id': evenement.id}) }}" class="btn btn-warning edit-club">edit</a></div>
 
             </div>
@@ -86,4 +93,5 @@ $('#sortButton').on('click', function() {
 
 
 {% endblock %}
+
 {% endblock %}

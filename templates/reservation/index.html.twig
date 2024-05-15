@@ -1,3 +1,5 @@
+{% extends 'base.html.twig' %}
+
 
 {% block title %}Reservation{% endblock %}
 
@@ -47,7 +49,7 @@
     </style>
 {% endblock %}
 
-{% block body %}
+{% block content %}
     <div class="container-fluid">
         <h1 class="mt-5 mb-4">Reservation index</h1>
 
@@ -56,7 +58,7 @@
                 <tr>
                     <th scope="col">Id</th>
                     <th scope="col">Etat</th>
-                    <th scope="col">Actions</th>
+
                 </tr>
             </thead>
             <tbody>
@@ -64,10 +66,7 @@
                     <tr>
                         <td>{{ reservation.id }}</td>
                         <td>{{ reservation.etat ? 'Yes' : 'No' }}</td>
-                        <td>
-                            <a href="{{ path('app_reservation_show', {'id': reservation.id}) }}" class="btn btn-info btn-sm">Show</a>
-                            <a href="{{ path('app_reservation_edit', {'id': reservation.id}) }}" class="btn btn-primary btn-sm">Edit</a>
-                        </td>
+
                     </tr>
                 {% else %}
                     <tr>
@@ -81,6 +80,6 @@
 
     </div>
 
-         <a href="{{ path('app_reservation_stats') }}" class="btn btn-primary">stat</a>
+
 
 {% endblock %}

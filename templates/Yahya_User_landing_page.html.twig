@@ -1,0 +1,47 @@
+{# templates/landing_page.html.twig #}
+
+{% extends 'baseFront.html.twig' %}
+
+{% block title %}Landing Page{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1 class="text-center my-5">Welcome to the Landing Page</h1>
+
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Subscriber Information</h5>
+                        <p class="card-text">Manage your subscriber information.</p>
+                        <a href="{{ path('app_subscriber_info_show', {'id': subscriber_info.id}) }}" class="btn btn-primary">Go to Subscriber Info</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Dietary Programs</h5>
+                        <p class="card-text">Access various dietary programs offered.</p>
+                        <a href="{{ path('app_dietary_programs_copy_show', {'id': dietary_program.id}) }}" class="btn btn-primary">Go to Dietary Programs</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Calorie Tracker</h5>
+                        <p class="card-text">Track your calorie intake.</p>
+                        <a href="{{ path('calorie_calculator') }}" class="btn btn-primary">Go to Calorie Tracker</a>
+                    </div>
+                </div>
+            </div>
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
